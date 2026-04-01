@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEBMS GEOff - V20 Gold</title>
+    
+    <!-- Link para o Manifesto -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a73e8">
+    <link rel="apple-touch-icon" href="https://flaticon.com">
+
+    <style>
+        /* O CSS que já definimos anteriormente (mantenha-o aqui ou crie um style.css) */
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #eef2f3; padding: 10px; display: flex; justify-content: center; }
+        .card-sistema { width: 100%; max-width: 1200px; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .hidden { display: none; }
+        .btn-add { background: #1a73e8; color: white; padding: 12px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; margin: 5px 0; border: 1px solid #ccc; border-radius: 6px; }
+        /* ... restante do CSS fornecido anteriormente ... */
+    </style>
+</head>
+<body>
+
+<div class="card-sistema">
+    <h2 id="titulo-app">CEBMS GEOff - Gestão Académica</h2>
+    
+    <!-- Painéis de Login e Menu (como no código anterior) -->
+    <div id="painel-login">
+        <input id="campo-user" type="text" placeholder="Utilizador">
+        <input id="campo-pass" type="password" placeholder="Senha">
+        <button class="btn-add" onclick="tentarLogin()">Entrar</button>
+    </div>
+    
+    <div id="painel-menu" class="hidden">
+        <button class="btn-add" onclick="fazerBackup()">Exportar Dados</button>
+        <button class="btn-add" style="background:#dc3545; margin-top:10px" onclick="location.reload()">Sair</button>
+    </div>
+</div>
+
+<script>
+    // Registo do Service Worker para funcionar como APP
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js')
+            .then(() => console.log("Sistema GEOff pronto para uso offline!"))
+            .catch(err => console.log("Erro no registro do SW:", err));
+    }
+
+    // Lógica do Banco de Dados Local
+    let db = JSON.parse(localStorage.getItem('geoff_db_v20')) || { turmas:[], alunos:[], profs:[] };
+    const save = () => localStorage.setItem('geoff_db_v20', JSON.stringify(db));
+
+    function tentarLogin() {
+        if(document.getElementById('campo-user').value === "admin") {
+            document.getElementById('painel-login').classList.add('hidden');
+            document.getElementById('painel-menu').classList.remove('hidden');
+        }
+    }
+</script>
+</body>
+</html>
