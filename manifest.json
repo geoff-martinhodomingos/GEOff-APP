@@ -1,0 +1,17 @@
+{
+  "name": "CEBMS GEOff Gestão Académica",
+  "short_name": "GEOff V20",
+  "description": "Sistema de Gestão Escolar para o Complexo Escolar Nº 295",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a73e8",
+  "icons": [
+    {
+      "src": "https://flaticon.com",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
